@@ -1,3 +1,4 @@
+
 # O QUE DEVE SER FEITO
 
 Você deverá implementar o fluxo de tratamento de dados descrito abaixo,
@@ -21,3 +22,24 @@ caracteres especiais. Apenas letras, números e hífen são permitidos. Ex. 'Sã
 Paulo - abç' -> 'SAO PAULO - ABC'
 5. Remover os caracteres não numéricos da coluna PHONE;
 6. Salvar o arquivo .csv com a nova coluna em UTF-8;
+
+## Como executar o código
+
+### Requerimentos:
+- Python +3.9
+- Poetry
+
+O código deve ser executado dentro de um ambiente virtual do poetry, para instalar o [poetry](https://python-poetry.org/), utilize o pip:
+		`pip3 install poetry`
+Depois é só entrar nesse repositório e executar:
+		`poetry install && poetry install`
+Uma vez instalada as dependências do projeto, executar o arquivo *challenge.py*:
+		`./challenge.py`
+
+Há o arquivo de _tests.py_ disponível e caso queira execute-o para testar os principais componentes do código.
+
+O projeto foi desenvolvido utilizando Linux. Em máquinas Windows, verifique como instalar o `pip`e/ou `poetry`.
+
+Sob quaisquer dúvidas, favor entrar em contato.
+
+
