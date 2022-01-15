@@ -44,7 +44,12 @@ Uma vez instalada as dependências do projeto, executar o arquivo *challenge.py*
 Há o arquivo de _tests.py_ disponível e caso queira execute-o para testar os principais componentes do código.
 
 O projeto foi desenvolvido utilizando Linux. Em máquinas Windows, verifique como instalar o `pip`e/ou `poetry`.
-
 Sob quaisquer dúvidas, favor entrar em contato.
+
+## Arquivo finalizado
+
+O arquivo em [natal2021_finalizada.csv](https://github.com/jeanlandim/pmweb_challenge/blob/main/data/natal2021.csv) já foi tratado pelo o script,
+e pode ser útil para atestar a usabilidade do script, sem precisar executá-lo.
+
 
 

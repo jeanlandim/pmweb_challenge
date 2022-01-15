@@ -142,18 +142,25 @@ def cleanup():
     string_sanitizer = StringSanitizer()
     csv = dd.read_csv(filename, sep=',',  encoding=file_encoding)
     logger.info(f"Updating {filename}.")
-
+    
+    iteration_n = 0
     for number, series in csv.iterrows():
-        csv.loc[number, 'CUSTOMER_ID'] = string_sanitizer.remove_whitespace(
+        if iteration_n == 10000: 
+            logger.info(f"Updated {iteration_n} rows")
+            csv.to_csv(filename)
+            iteration_n = 0
+
+        csv.at[number, 'CUSTOMER_ID'] = string_sanitizer.remove_whitespace(
                 series['CUSTOMER_ID'])
-        csv.loc[number, 'CITY'] = string_sanitizer.remove_whitespace(
+        csv.at[number, 'CITY'] = string_sanitizer.remove_whitespace(
                 series['CITY'])
-        csv.loc[number, 'PHONE'] = string_sanitizer.phone_sanitize(
+        csv.at[number, 'PHONE'] = string_sanitizer.phone_sanitize(
                 series['PHONE'])
-        csv.loc[number, 'CITY_ASCII'] = string_sanitizer.to_ascii(
+        csv.at[number, 'CITY_ASCII'] = string_sanitizer.to_ascii(
                 series['CITY'])
 
-        csv.to_csv(filename)
+        iteration_n += 1
+
 
 if __name__ == '__main__':
    cleanup()
