@@ -6,12 +6,12 @@ authors = ["Jean Landim <jewanbb@gmail.com>"]
 
 [tool.poetry.dependencies]
 python = "^3.9"
-dask = {extras = ["dataframe"], version = "^2022.1.0"}
 requests = "^2.27.1"
 loguru = "^0.5.3"
 pytest = "^6.2.5"
 pytest-watch = "^4.2.0"
 Unidecode = "^1.3.2"
+pandas = "^1.3.5"
 
 [tool.poetry.dev-dependencies]
 

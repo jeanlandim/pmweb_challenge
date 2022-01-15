@@ -31,7 +31,8 @@ import requests, re
 from unidecode import unidecode
 from loguru import logger
 from zipfile import ZipFile
-from dask import dataframe as dd
+import pandas as dd
+
 
 class FileGetter:
     """ 
@@ -120,4 +121,40 @@ class StringSanitizer:
         string = string.upper()
         return string
 
+
+def cleanup():
+    """
+        Cleanups the provided CSV following, requirements as described
+        on the top of this file.
+    """
+
+    # 'url' is the variable with url containing zip file.
+    # 'path' is the path where file must be uncompressed.
+    url = 'https://oto-public.s3.amazonaws.com/natal2021.zip'
+    path = './data' + '/' +  url.split('/')[-1]
     
+    # Gets file from remote and returns the full path filename
+    # of file, as file's encoding too.
+    file_getter = FileGetter(url, path) 
+    filename, file_encoding = file_getter.get_file_properties()
+    
+    # Initialize and read CSV file.
+    string_sanitizer = StringSanitizer()
+    csv = dd.read_csv(filename, sep=',',  encoding=file_encoding)
+    logger.info(f"Updating {filename}.")
+
+    for number, series in csv.iterrows():
+        csv.loc[number, 'CUSTOMER_ID'] = string_sanitizer.remove_whitespace(
+                series['CUSTOMER_ID'])
+        csv.loc[number, 'CITY'] = string_sanitizer.remove_whitespace(
+                series['CITY'])
+        csv.loc[number, 'PHONE'] = string_sanitizer.phone_sanitize(
+                series['PHONE'])
+        csv.loc[number, 'CITY_ASCII'] = string_sanitizer.to_ascii(
+                series['CITY'])
+
+        csv.to_csv(filename)
+
+if __name__ == '__main__':
+   cleanup()
+
