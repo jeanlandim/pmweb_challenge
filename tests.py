@@ -1,5 +1,5 @@
 import os
-from challenge import FileGetter
+from challenge import FileGetter, StringSanitizer
 
 class TestFileGetter:
       url = 'https://oto-public.s3.amazonaws.com/natal2021.zip'
@@ -25,5 +25,19 @@ class TestFileGetter:
 
           
       
+class TestStringSanitizer:
+    sanitizer = StringSanitizer()
+
+    def test_remove_whitespace(self):
+        string = ' pmweb'
+        assert self.sanitizer.remove_whitespace(string) == 'pmweb'
+
+    def test_phone_sanitize(self):
+        string = ' +(55)119a A81-21%@23$5&&8'
+        assert self.sanitizer.phone_sanitize(string) == '5511981212358'
+
+    def test_to_ascii(self):
+        string = ' 99 - São Paulo '
+        assert self.sanitizer.to_ascii(string) == '99 - SAO PAULO'
 
 

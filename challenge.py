@@ -27,7 +27,8 @@
     6. Salvar o arquivo .csv com a nova coluna em UTF-8;
 
 """
-import requests
+import requests, re
+from unidecode import unidecode
 from loguru import logger
 from zipfile import ZipFile
 from dask import dataframe as dd
@@ -85,3 +86,38 @@ class FileGetter:
         return self.extracted_filename
 
 
+class StringSanitizer:
+    """ Sanitize strings, removing whitespaces, replace UTF-8 chars,
+    lower and special chars. """
+
+    @staticmethod
+    def remove_ws(func):
+        """ Decorator function to remove whitespaces
+            from beginning and end of a string.
+            Ex: ' Porto Alegre ' -> 'Porto Alegre'.
+        """
+        def wrapper(self, string: str) -> str:
+            string = re.sub('^\s*|\s*$','', string)
+            return func(self, string)
+        return wrapper
+    
+    @remove_ws
+    def remove_whitespace(self, string):
+        """ Remove whitespaces from beginning and end of a string.
+            Ex: ' Porto Alegre ' -> 'Porto Alegre'.
+        """
+        return string
+    
+    def phone_sanitize(self, string: str) -> str:
+        """ Remove non numbers chars from string """
+        return re.sub('(?![0-9]).','', string) 
+
+    @remove_ws 
+    def to_ascii(self, string: str) -> str:
+        """ Transform to ASCII, uppercase and with hiphens. """
+        string = unidecode(string)
+        string = re.sub('(?![0-9]|[a-zA-Z]|-|\s).','',string)
+        string = string.upper()
+        return string
+
+    
