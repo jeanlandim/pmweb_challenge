@@ -48,7 +48,7 @@ Sob quaisquer dúvidas, favor entrar em contato.
 
 ## Arquivo finalizado
 
-O arquivo em [natal2021_finalizada.csv](https://github.com/jeanlandim/pmweb_challenge/blob/main/data/natal2021.csv) já foi tratado pelo o script,
+O arquivo em [natal2021_finalizada.csv](https://github.com/jeanlandim/pmweb_challenge/blob/main/data/natal2021_finalizada.csv) já foi tratado pelo o script,
 e pode ser útil para atestar a usabilidade do script, sem precisar executá-lo.
 
 
