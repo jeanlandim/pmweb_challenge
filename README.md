@@ -30,11 +30,16 @@ Paulo - abç' -> 'SAO PAULO - ABC'
 - Poetry
 
 O código deve ser executado dentro de um ambiente virtual do poetry, para instalar o [poetry](https://python-poetry.org/), utilize o pip:
-		`pip3 install poetry`
+
+		pip3 install poetry
+		
 Depois é só entrar nesse repositório e executar:
-		`poetry install && poetry install`
+
+		poetry install && poetry install
+		
 Uma vez instalada as dependências do projeto, executar o arquivo *challenge.py*:
-		`./challenge.py`
+
+		./challenge.py
 
 Há o arquivo de _tests.py_ disponível e caso queira execute-o para testar os principais componentes do código.
 
